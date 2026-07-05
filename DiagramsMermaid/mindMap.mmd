@@ -1,0 +1,19 @@
+mindmap
+  root((Text Cleaning Logic))
+    Step 1: Extract Base
+      Use dotall modifier
+      Catch multiline <h1>
+    Step 2: Strip Tags
+      Find anything inside <>
+      Replace with empty string
+    Step 3: Decode
+      Convert HTML entities
+      &amp; becomes &
+    Step 4: Normalize
+      Remove tabs
+      Remove newlines
+      Single space format
+    Step 5: OS Safety
+      No slashes
+      No colons
+      Max length 60

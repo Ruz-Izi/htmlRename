@@ -1,0 +1,14 @@
+classDiagram
+    class TextSanitizerProcessor {
+        +remove_html_tags(text)
+        +decode_html_entities(text)
+        +normalize_spacing(text)
+        +make_filename_safe(text)
+    }
+    class PythonBuiltIns {
+        +re.sub
+        +html.unescape
+        +str.split
+        +str.join
+    }
+    TextSanitizerProcessor --> PythonBuiltIns : relies on

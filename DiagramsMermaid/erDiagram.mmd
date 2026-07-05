@@ -1,0 +1,17 @@
+erDiagram
+    HTML_DOCUMENT {
+        string file_name
+        string internal_content
+    }
+    H1_BLOCK {
+        string raw_html
+        string cleaned_text
+    }
+    NESTED_TAGS {
+        string tag_name
+        string attributes
+    }
+    
+    HTML_DOCUMENT ||--o{ H1_BLOCK : contains
+    H1_BLOCK ||--o{ NESTED_TAGS : may_contain
+    %% The cleaning process destroys NESTED_TAGS to leave only text.

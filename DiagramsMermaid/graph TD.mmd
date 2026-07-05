@@ -1,0 +1,10 @@
+graph TD
+    A[Start Text Extraction] --> B[Find <h1...>block</h1>]
+    B --> C[Extract raw block content]
+    C --> D[Regex Strip HTML Tags]
+    D --> E[HTML Unescape Entities]
+    E --> F[Normalize Whitespace]
+    F --> G[Remove illegal characters]
+    G --> H{Is string empty?}
+    H -- Yes --> I[Return None]
+    H -- No --> J[Return first 60 chars]

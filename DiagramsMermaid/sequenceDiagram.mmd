@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant RawText as Raw <h1> content
+    participant RegexTag as Tag Remover (<[^>]+>)
+    participant Unescape as HTML Decoder (html.unescape)
+    participant Normalizer as Whitespace Normalizer (split/join)
+    participant Sanitizer as Filename Sanitizer
+    
+    RawText->>RegexTag: '<a href="...">MacMD Viewer</a>'
+    RegexTag->>Unescape: 'MacMD Viewer'
+    Unescape->>Normalizer: 'MacMD Viewer '
+    Normalizer->>Sanitizer: 'MacMD Viewer'
+    Sanitizer-->>RawText: Final Clean String for Filename
