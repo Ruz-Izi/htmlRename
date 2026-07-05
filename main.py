@@ -8,22 +8,26 @@
 import os
 import re
 import html  # New standard library module to clean up HTML entities
-from AppKit import NSOpenPanel, NSApplication, NSApp
+
+try:
+    import tkinter as tk
+    from tkinter import filedialog
+except ImportError:
+    tk = None
+    filedialog = None
 
 
 def open_mac_folder_selector():
-    app = NSApplication.sharedApplication()
-    app.setActivationPolicy_(0)
-    app.activateIgnoringOtherApps_(True)
+    if filedialog is None:
+        raise RuntimeError("tkinter is unavailable in this Python environment")
 
-    dialog_panel = NSOpenPanel.openPanel()
-    dialog_panel.setCanChooseFiles_(False)
-    dialog_panel.setCanChooseDirectories_(True)
-    dialog_panel.setAllowsMultipleSelection_(False)
-
-    if dialog_panel.runModal() == 1:
-        return dialog_panel.URLs()[0].path()
-    return None
+    root = tk.Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)
+    folder_path = filedialog.askdirectory(
+        title="Select Folder containing HTML files")
+    root.destroy()
+    return folder_path or None
 
 
 def extract_first_heading_from_html(file_path):
